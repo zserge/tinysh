@@ -54,14 +54,14 @@ where
                     1 => io_out = Stdio::from(File::create(path)?),
                     _ => return Err(Error::new(ErrorKind::Other, "bad redirection fd")),
                 },
-                _ => {
+                None => {
                     return Err(Error::new(
                         ErrorKind::Other,
                         "redirection filename expected",
                     ));
                 }
             },
-            _ => {}
+            Token::Blank => {}
         }
     }
     if args.len() == 0 {
