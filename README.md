@@ -3,7 +3,7 @@
 > If you hold a UNIX shell to your ear, you can hear the C.
 
 This is a tiny UNIX shell, implemented in Rust and in C.
-It is derived from the brilliant IOCCC submission back in 1990 by Sean Dorward. The repository includes the original IOCCC version, as well as the modrnized deobfuscated version in C89, and a complete rewrite in Rust.
+It is derived from the brilliant IOCCC submission back in 1990 by Sean Dorward. The repository includes the original IOCCC version, as well as the modernized deobfuscated version in C89, and a complete rewrite in Rust.
 
 To run the shell do: `cargo run`. Or, better, `rlwrap cargo run` if you want to have a history of commands.
 
