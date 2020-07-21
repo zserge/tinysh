@@ -64,7 +64,7 @@ where
             Token::Blank => {}
         }
     }
-    if args.len() == 0 {
+    if args.is_empty() {
         return Ok(());
     }
     args.reverse();
