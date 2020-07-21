@@ -90,7 +90,7 @@ where
         run(it, Stdio::from(child.stdin.take().unwrap()))?;
     }
     child.wait()?;
-    return Ok(());
+    Ok(())
 }
 
 fn main() {
