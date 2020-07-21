@@ -16,7 +16,8 @@ fn token(x: Option<&char>) -> Token {
     match x {
         Some(&c) => match c {
             '|' => Token::Delim(true),
-            '<' | '>' => Token::Redir(if c == '>' { 1 } else { 0 }),
+            '<' => Token::Redir(0),
+            '>' => Token::Redir(1),
             ' ' | '\t' | '\n' | '\r' => Token::Blank,
             _ => Token::Normal(c),
         },
