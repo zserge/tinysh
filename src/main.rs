@@ -100,10 +100,11 @@ fn main() {
         let mut input = String::new();
         match io::stdin().read_line(&mut input) {
             Ok(0) => return,
-            Ok(_) => match run(input.chars().rev().peekable(), Stdio::inherit()) {
-                Err(e) => println!("error: {}", e),
-                _ => {}
-            },
+            Ok(_) => {
+                if let Err(e) = run(input.chars().rev().peekable(), Stdio::inherit()) {
+                    println!("error: {}", e);
+                }
+            }
             Err(e) => {
                 println!("io error: {}", e);
                 return;
