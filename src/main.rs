@@ -54,17 +54,17 @@ where
                     1 => io_out = Stdio::from(File::create(path)?),
                     _ => return Err(Error::new(ErrorKind::Other, "bad redirection fd")),
                 },
-                _ => {
+                None => {
                     return Err(Error::new(
                         ErrorKind::Other,
                         "redirection filename expected",
                     ));
                 }
             },
-            _ => {}
+            Token::Blank => {}
         }
     }
-    if args.len() == 0 {
+    if args.is_empty() {
         return Ok(());
     }
     args.reverse();
@@ -90,7 +90,7 @@ where
         run(it, Stdio::from(child.stdin.take().unwrap()))?;
     }
     child.wait()?;
-    return Ok(());
+    Ok(())
 }
 
 fn main() {
@@ -100,10 +100,11 @@ fn main() {
         let mut input = String::new();
         match io::stdin().read_line(&mut input) {
             Ok(0) => return,
-            Ok(_) => match run(input.chars().rev().peekable(), Stdio::inherit()) {
-                Err(e) => println!("error: {}", e),
-                _ => {}
-            },
+            Ok(_) => {
+                if let Err(e) = run(input.chars().rev().peekable(), Stdio::inherit()) {
+                    println!("error: {}", e);
+                }
+            }
             Err(e) => {
                 println!("io error: {}", e);
                 return;
